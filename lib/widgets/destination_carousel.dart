@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_ui_starter/models/destination_model.dart';
 import 'package:flutter_travel_ui_starter/screens/destination_detail_screen.dart';
-import 'package:flutter_travel_ui_starter/screens/destination_screen.dart';
 import 'package:flutter_travel_ui_starter/screens/list_destinantions_screen.dart';
-import 'package:flutter_travel_ui_starter/screens/list_destinations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DestinationCarousel extends StatelessWidget {

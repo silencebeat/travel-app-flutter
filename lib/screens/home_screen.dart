@@ -90,14 +90,14 @@ class _HomeScreenState extends State<HomeScreen> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.search,
+              Icons.home_outlined,
               size: 30.0,
             ),
             title: SizedBox.shrink(),
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.local_pizza,
+              Icons.book_outlined,
               size: 30.0,
             ),
             title: SizedBox.shrink(),
