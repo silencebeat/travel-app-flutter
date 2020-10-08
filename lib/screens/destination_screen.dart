@@ -13,7 +13,7 @@ class DestinationScreen extends StatefulWidget {
 
 class _DestinationScreenState extends State<DestinationScreen> {
   Text _buildRatingStars(int rating) {
-    String stars = "";
+    var stars = "";
     for (var i = 0; i < rating; i++) {
       stars += '⭐️ ';
     }

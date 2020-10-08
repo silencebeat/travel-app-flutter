@@ -8,7 +8,7 @@ class ActivityWidget extends StatelessWidget {
   ActivityWidget({this.destination});
 
   Text _buildRatingStars(int rating) {
-    String stars = "";
+    var stars = "";
     for (var i = 0; i < rating; i++) {
       stars += '⭐️ ';
     }

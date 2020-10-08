@@ -16,7 +16,7 @@ class _ListDestinationScreenState extends State<ListDestinationScreen> {
   int _currentIndex = 0;
   Variable variable = new Variable();
 
-  static List<String> imgSlider = [
+  static var imgSlider = [
     'header1.jpg',
     'header2.jpg',
     'header3.jpg',
@@ -154,7 +154,7 @@ class _ListDestinationScreenState extends State<ListDestinationScreen> {
                             decoration: BoxDecoration(
                             
                               shape: BoxShape.rectangle,
-                              borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                              borderRadius: BorderRadius.all(Radius.circular(4.0)),
                               color: _currentIndex == index
                                   ? Theme.of(context).accentColor
                                   : Color.fromRGBO(0, 0, 0, 0.4),
