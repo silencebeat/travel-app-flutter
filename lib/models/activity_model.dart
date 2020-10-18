@@ -1,3 +1,5 @@
+import 'package:flutter_travel_ui_starter/models/review_model.dart';
+
 class Activity {
   String imageUrl;
   String name;
@@ -5,6 +7,8 @@ class Activity {
   List<String> startTimes;
   int rating;
   int price;
+  String description;
+  List<Review> reviews;
 
   Activity({
     this.imageUrl,
@@ -13,5 +17,7 @@ class Activity {
     this.startTimes,
     this.rating,
     this.price,
+    this.description,
+    this.reviews
   });
 }

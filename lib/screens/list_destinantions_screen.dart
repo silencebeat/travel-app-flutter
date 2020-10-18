@@ -1,10 +1,9 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_ui_starter/models/destination_model.dart';
 import 'package:flutter_travel_ui_starter/models/variable.dart';
 import 'package:flutter_travel_ui_starter/screens/destination_detail_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ListDestinationScreen extends StatefulWidget {
   @override
@@ -16,7 +15,7 @@ class _ListDestinationScreenState extends State<ListDestinationScreen> {
   int _currentIndex = 0;
   Variable variable = new Variable();
 
-  static var imgSlider = [
+  var imgSlider = [
     'header1.jpg',
     'header2.jpg',
     'header3.jpg',
@@ -65,9 +64,7 @@ class _ListDestinationScreenState extends State<ListDestinationScreen> {
                   ? Colors.black
                   : Colors.white, //change your color here
             ),
-            backgroundColor: isShrink
-                  ? Colors.white
-                  : Colors.transparent,
+            backgroundColor: isShrink ? Colors.white : Colors.transparent,
             pinned: true,
             expandedHeight: 300.0,
             flexibleSpace: FlexibleSpaceBar(
@@ -97,14 +94,12 @@ class _ListDestinationScreenState extends State<ListDestinationScreen> {
                         viewportFraction: 1.0,
                         autoPlay: true,
                         pauseAutoPlayOnTouch: Duration(milliseconds: 60000),
-                        autoPlayAnimationDuration: Duration(milliseconds: 1500),
+                        autoPlayAnimationDuration: Duration(milliseconds: 2000),
                         autoPlayCurve: Curves.fastOutSlowIn,
                         onPageChanged: (index) {
                           setState(() {
-                              _currentIndex = index;
+                            _currentIndex = index;
                           });
-                          
-                          // _index = index;
                         },
                       ),
                       // child: Container(
@@ -142,7 +137,6 @@ class _ListDestinationScreenState extends State<ListDestinationScreen> {
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: Row(
-                  
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: imgSlider.map((url) {
                           int index = imgSlider.indexOf(url);
@@ -152,9 +146,9 @@ class _ListDestinationScreenState extends State<ListDestinationScreen> {
                             margin: EdgeInsets.symmetric(
                                 vertical: 10.0, horizontal: 2.0),
                             decoration: BoxDecoration(
-                            
                               shape: BoxShape.rectangle,
-                              borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(4.0)),
                               color: _currentIndex == index
                                   ? Theme.of(context).accentColor
                                   : Color.fromRGBO(0, 0, 0, 0.4),
@@ -175,13 +169,13 @@ class _ListDestinationScreenState extends State<ListDestinationScreen> {
                 Destination destination = destinations[index];
                 return GestureDetector(
                   onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => DestinationDetailScreen(
-                                destination: destination,
-                              ),
-                        ),
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => DestinationDetailScreen(
+                        destination: destination,
                       ),
+                    ),
+                  ),
                   child: Stack(
                     children: <Widget>[
                       Container(
@@ -216,18 +210,33 @@ class _ListDestinationScreenState extends State<ListDestinationScreen> {
                                   ),
                                   Container(
                                     width: 120.0,
-                                    child: Text(
-                                      destination.country,
-                                      style: TextStyle(
-                                        fontSize: 15.0,
-                                        color: Colors.black45,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          FontAwesomeIcons.locationArrow,
+                                          size: 10.0,
+                                          color: Colors.black45,
+                                        ),
+                                        SizedBox(
+                                          width: 5.0,
+                                        ),
+                                        Text(
+                                          '${destination.country}',
+                                          style: TextStyle(
+                                            fontSize: 15.0,
+                                            color: Colors.black45,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ],
+                              ),
+                              SizedBox(
+                                height: 5.0,
                               ),
                               Text(
                                 '${destination.activities.length} Activities',

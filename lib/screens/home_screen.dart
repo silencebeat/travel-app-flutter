@@ -21,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildIcon(int index) {
     return GestureDetector(
+      
       onTap: () {
         setState(() {
           _selectedIndex = index;

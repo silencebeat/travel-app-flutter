@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_travel_ui_starter/screens/home_screen.dart';
 // import 'package:flutter/services.dart';
 
@@ -12,6 +13,9 @@ class MyApp extends StatelessWidget {
     //   statusBarColor: Color(0xFF3EBACE),
     //   statusBarBrightness: Brightness.light,
     // ));
+    SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+      ]);
     return MaterialApp(
       title: 'Flutter Travel UI',
       debugShowCheckedModeBanner: false,

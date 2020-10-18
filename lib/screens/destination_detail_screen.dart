@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_ui_starter/models/activity_model.dart';
 import 'package:flutter_travel_ui_starter/models/destination_model.dart';
+import 'package:flutter_travel_ui_starter/screens/activity_detail_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DestinationDetailScreen extends StatefulWidget {
@@ -13,12 +14,6 @@ class DestinationDetailScreen extends StatefulWidget {
 }
 
 class _DestinationDetailScreenState extends State<DestinationDetailScreen> {
-  static const double minExtent = 0.2;
-  static const double maxExtent = 0.6;
-  bool isExpanded = false;
-  double initialExtent = minExtent;
-  BuildContext draggableSheetContext;
-
   Text _buildRatingStars(int rating) {
     var stars = "";
     for (var i = 0; i < rating; i++) {
@@ -91,19 +86,6 @@ class _DestinationDetailScreenState extends State<DestinationDetailScreen> {
                     children: <Widget>[
                       Container(
                         height: MediaQuery.of(context).size.width,
-                        // decoration: BoxDecoration(
-                        //   borderRadius: BorderRadius.only(
-                        //     bottomLeft: Radius.circular(30),
-                        //     bottomRight: Radius.circular(30.0),
-                        //   ),
-                        //   boxShadow: [
-                        //     BoxShadow(
-                        //       color: Colors.black26,
-                        //       offset: Offset(0.0, 2.0),
-                        //       blurRadius: 6.0,
-                        //     ),
-                        //   ],
-                        // ),
                         child: Hero(
                           tag: widget.destination.imageUrl,
                           child: ClipRRect(
@@ -133,24 +115,12 @@ class _DestinationDetailScreenState extends State<DestinationDetailScreen> {
                                 letterSpacing: 1.2,
                               ),
                             ),
-                            Row(
-                              children: <Widget>[
-                                Icon(
-                                  FontAwesomeIcons.locationArrow,
-                                  size: 10.0,
-                                  color: Colors.white70,
-                                ),
-                                SizedBox(
-                                  width: 5.0,
-                                ),
-                                Text(
-                                  widget.destination.country,
-                                  style: TextStyle(
-                                    color: Colors.white70,
-                                    fontSize: 20.0,
-                                  ),
-                                ),
-                              ],
+                            Text(
+                              widget.destination.country,
+                              style: TextStyle(
+                                color: Colors.white70,
+                                fontSize: 20.0,
+                              ),
                             ),
                           ],
                         ),
@@ -174,19 +144,28 @@ class _DestinationDetailScreenState extends State<DestinationDetailScreen> {
                   (context, index) {
                     Activity activity = widget.destination.activities[index];
 
-                    return Stack(
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.fromLTRB(40.0, 5.0, 20.0, 5.0),
-                          height: 170.0,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20.0)),
-                          child: Padding(
-                            padding:
-                                EdgeInsets.fromLTRB(100.0, 20.0, 20.0, 20.0),
-                            child: Column(
+                    return GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ActivityDetailScreen(
+                            activity: activity, index: index
+                          ),
+                        ),
+                      ),
+                      child: Stack(
+                        children: <Widget>[
+                          Container(
+                            margin: EdgeInsets.fromLTRB(40.0, 5.0, 20.0, 5.0),
+                            height: 170.0,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20.0)),
+                            child: Padding(
+                              padding:
+                                  EdgeInsets.fromLTRB(100.0, 20.0, 20.0, 20.0),
+                              child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
@@ -272,24 +251,28 @@ class _DestinationDetailScreenState extends State<DestinationDetailScreen> {
                                   ),
                                 ],
                               ),
-                          ),
-                        ),
-                        Positioned(
-                          left: 20.0,
-                          top: 15.0,
-                          bottom: 15.0,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),
-                            child: Image(
-                              width: 110.0,
-                              image: AssetImage(
-                                activity.imageUrl,
-                              ),
-                              fit: BoxFit.cover,
                             ),
                           ),
-                        ),
-                      ],
+                          Positioned(
+                            left: 20.0,
+                            top: 15.0,
+                            bottom: 15.0,
+                            child: Hero(
+                              tag: '${activity.imageUrl}-$index',
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20.0),
+                                child: Image(
+                                  width: 110.0,
+                                  image: AssetImage(
+                                    activity.imageUrl,
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     );
                   },
                   childCount: widget.destination.activities.length,
@@ -297,19 +280,8 @@ class _DestinationDetailScreenState extends State<DestinationDetailScreen> {
               )
             ],
           ),
-          
         ],
       ),
     );
-  }
-
-  void _toggleDraggableScrollableSheet() {
-    if (draggableSheetContext != null) {
-      setState(() {
-        initialExtent = isExpanded ? minExtent : maxExtent;
-        isExpanded = !isExpanded;
-      });
-      DraggableScrollableActuator.reset(draggableSheetContext);
-    }
   }
 }
